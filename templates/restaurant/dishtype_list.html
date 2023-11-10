@@ -1,10 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Dish type list</h1>
+  <h1>
+    Dish type list
+    <a href="{% url 'restaurant:dish_type-create' %}" class="btn btn-primary">Add new dish type</a>
+  </h1>
   {% if dishtype_list %}
     <ul>
       {% for dish_type in dishtype_list %}
         <li>{{ dish_type.name }}</li>
+        <a href="{% url 'restaurant:dish_type-update' dish_type.pk %}" class="btn btn-warning">Update</a>
+        <a href="{% url 'restaurant:dish_type-delete' dish_type.pk %}" class="btn btn-danger">Delete</a>
       {% endfor %}
     </ul>
   {% else %}

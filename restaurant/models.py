@@ -26,3 +26,7 @@ class Dish(models.Model):
         DishType, on_delete=models.CASCADE, related_name="dishes"
     )
     cooks = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="dishes")
+
+    class Meta:
+        verbose_name = "Dish"
+        verbose_name_plural = "Dishes"
