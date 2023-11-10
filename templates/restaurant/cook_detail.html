@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>{{ cook.first_name }} {{ cook.last_name }}</h1>
+  <p><span class="bold">Years of experience:</span> {{ cook.years_of_experience }}</p>
+  {% if dish_list %}
+    <p><span class="bold">Dishes:</span></p>
+        {% for dish in dish_list %}
+          <div class="card">
+            <p><span class="bold">Dish name:</span> <a href="{% url 'restaurant:dish-detail' dish.pk %}">{{ dish.name }}</a></p>
+          </div>
+        {% endfor %}
+  {% else %}
+    <p>Doesn't own any dishes</p>
+  {% endif %}
+{% endblock content %}

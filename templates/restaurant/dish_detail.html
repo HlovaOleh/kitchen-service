@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>{{ car.model }}</h1>
+  <p><span class="bold">Dish type: </span>{{ dish.dish_type.name }}</p>
+  <p><span class="bold">Cooks: </span></p>
+  {% for cook in dish.cooks.all %}
+    <div class="card">
+      <p><span class="bold">Cook name: </span><a href="{% url 'restaurant:cook-detail' cook.pk %}"> {{ cook.first_name }} {{ cook.last_name }}</a></p>
+      <p><span class="bold">Years of experience: </span>{{ cook.years_of_experience }}</p>
+    </div>
+  {% empty %}
+    <p>There are no cooks</p>
+  {% endfor %}
+{% endblock %}
