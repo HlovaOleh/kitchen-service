@@ -1,6 +1,12 @@
-<div class="sidebar">
-  <a class="sidebar__link" href="{% url 'restaurant:index' %}">Home page</a>
-  <a class="sidebar__link" href="{% url 'restaurant:dish_type-list' %}">Dish types</a>
-  <a class="sidebar__link" href="{% url 'restaurant:dish-list' %}">Dishes</a>
-  <a class="sidebar__link" href="{% url 'restaurant:cook-list' %}">Cooks</a>
-</div>
+<ul class="sidebar-nav">
+  {% if user.is_authenticated %}
+    <li>User: <a href="{% url 'restaurant:cook-detail' pk=user.id %}">{{ user.username }}</a></li>
+    <li><a href="{% url 'logout' %}">Logout</a></li>
+  {% else %}
+    <li><a href="{% url 'login' %}">Login</a></li>
+  {% endif %}
+  <li><a href="{% url "restaurant:index" %}">Home page</a></li>
+  <li><a href="{% url "restaurant:dish_type-list" %}">Dish types</a></li>
+  <li><a href="{% url "restaurant:dish-list" %}">Dishes</a></li>
+  <li><a href="{% url "restaurant:cook-list" %}">Cooks</a></li>
+</ul>
