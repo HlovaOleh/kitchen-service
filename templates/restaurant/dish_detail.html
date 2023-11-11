@@ -1,48 +1,87 @@
-{% extends "base.html" %}
+{% extends 'layouts/base_sections.html' %}
+{% load static %}
+
+{% block title %} Dish detail {% endblock title %}
+
+{% block body %} class="bg-gray-100" {% endblock body %}
+
+{% block header %}
+
+{% include 'includes/navigation.html' %}
+
+{% endblock header %}
 
 {% block content %}
-  <h1>
-    Dish: {{ dish.name }}
-  </h1>
-  <br>
-  <p>Dish type: {{ dish.dish_type.name }}</p>
-  <br>
-  <form method="post" action="{% url 'restaurant:dish-cook-update' pk=dish.id %}">
-    {% csrf_token %}
-    <h1>
-      Cooks
-      {% if user in dish.cooks.all %}
-        <button type="submit" class="btn btn-danger link-to-page">
-          Delete me from this dish
-        </button>
-      {% else %}
-        <button type="submit"  class="btn btn-success link-to-page">
-          Assign me to this dish
-        </button>
-      {% endif %}
-    </h1>
-  </form>
-  <hr>
-  <ul class="list__styles">
-    {% for cook in dish.cooks.all %}
-      <li>
-        <strong>Username: </strong>{{ cook.username }}
-      </li>
-      <li>
-        <strong>Full name: </strong>({{ cook.first_name }} {{ cook.last_name }})
-      </li>
-      <li>
-        <strong>Years of experience: </strong>{{ cook.years_of_experience }}
-      </li>
-      <hr>
-    {% endfor %}
-  </ul>
-  <div>
-    <a href="{% url 'restaurant:dish-delete' pk=dish.id %}" class="btn btn-danger link-to-page">
-      Delete
-    </a>
-    <a href="{% url 'restaurant:dish-update' pk=dish.id %}" class="btn btn-secondary link-to-page">
-      Update
-    </a>
-  </div>
+  <section class="py-sm-7 py-5 position-relative">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 mx-auto">
+          <h2 class="mb-0">Dish Detail Information</h2>
+          <div class="row py-lg-7 py-5">
+            <div class="col-lg-7 col-md-7 z-index-2 position-relative px-md-2 px-sm-5 mt-sm-0 mt-4">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <h4 class="mb-0">{{ dish.name}}</h4>
+                <form method="post" action="{% url 'restaurant:dish-cook-update' pk=dish.id %}">
+                  {% csrf_token %}
+                  {% if user in dish.cooks.all %}
+                    <div class="d-block">
+                      <button type="submit" class="btn btn-sm btn-outline-info text-nowrap mb-0">
+                        Delete me from this dish
+                      </button>
+                    </div>
+                  {% else %}
+                    <div class="d-block">
+                      <button type="submit" class="btn btn-sm btn-outline-info text-nowrap mb-0">
+                        Assign me to this dish
+                      </button>
+                    </div>
+                  {% endif %}
+                </form>
+              </div>
+              <div class="row mb-4">
+                <div class="col-auto">
+                  <span class="h6">{{ dish.price }}</span>
+                  <span>Price</span>
+                </div>
+                <div class="col-auto">
+                  <span class="h6">{{ dish.dish_type.name }}</span>
+                  <span>Dish Type</span>
+                </div>
+              </div>
+              <p class="text-lg mb-0">
+                {{ dish.description}}
+              </p>
+              <br>
+              {% for cook in dish.cooks.all %}
+                <hr>
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h4 class="mb-0">
+                      <a href="{% url 'restaurant:cook-detail' pk=cook.id %}">{{ cook.username}}</a></h4>
+                </div>
+                <div class="row mb-4">
+                  <div class="col-auto">
+                    <span class="h6">{{ cook.first_name }} {{ cook.last_name }}</span>
+                  </div>
+                  <div class="col-auto">
+                    <span class="h6">{{ cook.years_of_experience }}</span>
+                    <span>Years of experience</span>
+                  </div>
+                </div>
+                <hr>
+                <br>
+              {% endfor %}
+                <div class="d-block">
+                  <button type="button" class="btn btn-sm btn-outline-info text-nowrap mb-0">
+                    <a href="{% url 'restaurant:dish-update' pk=dish.id %}">Update Dish</a>
+                  </button>
+                  <button type="button" class="btn btn-sm btn-outline-info text-nowrap mb-0">
+                    <a href="{% url 'restaurant:dish-delete' pk=dish.id %}">Delete Dish</a>
+                  </button>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 {% endblock %}

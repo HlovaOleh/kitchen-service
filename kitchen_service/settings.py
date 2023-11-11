@@ -134,3 +134,5 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 AUTH_USER_MODEL = "restaurant.Cook"
 
 LOGIN_REDIRECT_URL = "/"
+
+LOGOUT_REDIRECT_URL = "/accounts/login"

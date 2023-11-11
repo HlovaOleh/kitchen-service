@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import PasswordChangeView
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect, HttpResponseBadRequest
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
@@ -8,7 +9,7 @@ from django.views import generic
 from restaurant.forms import (
     DishForm,
     CookCreateForm,
-    CookExperienceUpdateForm,
+    CookUpdateForm,
     DishTypeSearchForm,
     DishSearchForm,
     CookSearchForm
@@ -16,17 +17,13 @@ from restaurant.forms import (
 from restaurant.models import Cook, DishType, Dish
 
 
-@login_required
 def index(request: HttpRequest) -> HttpResponse:
-    num_visits = request.session.get("num_visits", 0)
-    request.session["num_visits"] = num_visits + 1
     context = {
         "num_cooks": Cook.objects.count(),
         "num_dish_types": DishType.objects.count(),
         "num_dish": Dish.objects.count(),
-        "num_visits": num_visits + 1
     }
-    return render(request, "restaurant/index.html", context=context)
+    return render(request, "restaurant/custom-index.html", context=context)
 
 
 class DishTypeListView(LoginRequiredMixin, generic.ListView):
@@ -161,7 +158,7 @@ class CookDetailView(LoginRequiredMixin, generic.DetailView):
     queryset = Cook.objects.prefetch_related("dishes__dish_type")
 
 
-class CookCreateView(LoginRequiredMixin, generic.CreateView):
+class CookCreateView(generic.CreateView):
     model = Cook
     form_class = CookCreateForm
 
@@ -171,7 +168,13 @@ class CookDeleteView(LoginRequiredMixin, generic.DeleteView):
     success_url = reverse_lazy("restaurant:cook-list")
 
 
-class CookExperienceUpdateView(LoginRequiredMixin, generic.UpdateView):
+class CookUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Cook
-    form_class = CookExperienceUpdateForm
+    form_class = CookUpdateForm
+    success_url = reverse_lazy("restaurant:cook-list")
+
+
+class CookChangePasswordView(LoginRequiredMixin, PasswordChangeView):
+    model = Cook
+    template_name = "change_password.html"
     success_url = reverse_lazy("restaurant:cook-list")

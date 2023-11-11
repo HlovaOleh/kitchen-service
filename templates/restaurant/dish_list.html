@@ -1,21 +1,57 @@
-{% extends "base.html" %}
-{% load crispy_forms_filters %}
+{% extends 'layouts/base_sections.html' %}
+{% load static %}
+
+{% block title %} Dishes {% endblock title %}
+
+{% block body %} class="bg-gray-100" {% endblock body %}
+
+{% block header %}
+
+{% include 'includes/navigation.html' %}
+
+{% endblock header %}
 
 {% block content %}
-  <h1>Dish list
-    <a href="{% url 'restaurant:dish-create' %}" class="btn btn-primary">Add new dish</a>
-  </h1>
-  {% include "includes/search_form.html" %}
-  {% if dish_list %}
-    <ul>
-      {% for dish in dish_list %}
-        <li>
-          <a href="{% url 'restaurant:dish-detail' pk=dish.id %} ">{{ dish.name }}</a>
-          {{ dish.price }} ({{ dish.dish_type.name }})
-        </li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <p>There are no dishes in restaurant</p>
-  {% endif %}
+  <section class="py-sm-7 py-5 position-relative">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 mx-auto">
+          <h2 class="mb-0">Dish list</h2>
+          <div class="row">
+            <div class="col-lg-7 col-md-7 z-index-2 position-relative px-md-2 px-sm-5 mt-sm-0 mt-4">
+              {% if dish_list %}
+                {% include "includes/search_form.html" %}
+                {% for dish in dish_list %}
+                  <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h4 class="mb-0">{{ dish.name}}</h4>
+                    <div class="d-block">
+                      <button type="button" class="btn btn-sm btn-outline-info text-nowrap mb-0">
+                        <a href="{% url 'restaurant:dish-detail' pk=dish.id %}">Detail Information</a>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="row mb-4">
+                    <div class="col-auto">
+                      <span class="h6">{{ dish.price }}</span>
+                      <span>Price</span>
+                    </div>
+                    <div class="col-auto">
+                      <span class="h6">{{ dish.dish_type.name }}</span>
+                      <span>Dish Type</span>
+                    </div>
+                  </div>
+                  <p class="text-lg mb-0">
+                    {{ dish.description}}
+                  </p>
+                  <br>
+                {% endfor %}
+                {% else %}
+                  <p class="text-lg mb-0">There are no dishes in restaurant</p>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 {% endblock %}

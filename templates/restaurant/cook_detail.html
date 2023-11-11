@@ -1,22 +1,73 @@
-{% extends "base.html" %}
+{% extends 'layouts/base_sections.html' %}
+{% load static %}
+
+{% block title %} Cook detail {% endblock title %}
+
+{% block body %} class="bg-gray-100" {% endblock body %}
+
+{% block header %}
+
+{% include 'includes/navigation.html' %}
+
+{% endblock header %}
+
 {% block content %}
-  <h1>
-    Username: {{ cook.username }}
-  </h1>
-  <p><strong>First name:</strong> {{ cook.first_name }}</p>
-  <p><strong>Last name:</strong> {{ cook.last_name }}</p>
-  <p><strong>Years of experience:</strong> {{ cook.years_of_experience }}</p>
-  <div class="ml-3">
-    <h4>Dishes</h4>
-    {% for dish in cook.dishes.all %}
-        <hr>
-        <p><strong>Name:</strong> {{ dish.name }}</p>
-        <p><strong>Dish type:</strong> {{ dish.dish_type.name }}</p>
-        <p class="text-muted"><strong>Id:</strong> {{dish.id}}</p>
-    {% empty %}
-      <p>No dishes!</p>
-    {% endfor %}
-    <a href="{% url "restaurant:cook-update" pk=cook.id %}" class="btn btn-primary" >Update years of experience</a>
-    <a href="{% url "restaurant:cook-delete" pk=cook.id %}" class="btn btn-danger">Delete cook</a>
-  </div>
+  <section class="py-sm-7 py-5 position-relative">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 mx-auto">
+          <h2 class="mb-0">Cook Detail Information</h2>
+          <div class="row py-lg-7 py-5">
+            <div class="col-lg-7 col-md-7 z-index-2 position-relative px-md-2 px-sm-5 mt-sm-0 mt-4">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <h4 class="mb-0">{{ cook.username}}</h4>
+              </div>
+              <div class="row mb-4">
+                <div class="col-auto">
+                  <span>First name</span>
+                  <span class="h6">{{ cook.first_name }}</span>
+                </div>
+                <div class="col-auto">
+                  <span>Last name</span>
+                  <span class="h6">{{ cook.last_name }}</span>
+                </div>
+                <div class="col-auto">
+                  <span>Years of Experience</span>
+                  <span class="h6">{{ cook.years_of_experience }}</span>
+                </div>
+              </div>
+              <br>
+              <h3 class="mb-0">Dishes</h3>
+              {% for dish in cook.dishes.all %}
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h4 class="mb-0">
+                      <a href="{% url 'restaurant:dish-detail' pk=dish.id %}">{{ dish.name }}</a></h4>
+                </div>
+                <div class="row mb-4">
+                  <div class="col-auto">
+                    <span>Dish Type</span>
+                    <span class="h6">{{ dish.dish_type.name }}</span>
+                  </div>
+                  <div class="col-auto">
+                    <span>Price</span>
+                    <span class="h6">{{ dish.price }}</span>
+                  </div>
+                </div>
+                <hr>
+                <br>
+              {% endfor %}
+                <div class="d-block">
+                  <button type="button" class="btn btn-sm btn-outline-info text-nowrap mb-0">
+                    <a href="{% url 'restaurant:cook-update' pk=cook.id %}">Update Cook</a>
+                  </button>
+                  <button type="button" class="btn btn-sm btn-outline-info text-nowrap mb-0">
+                    <a href="{% url 'restaurant:cook-delete' pk=cook.id %}">Delete Cook</a>
+                  </button>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 {% endblock %}

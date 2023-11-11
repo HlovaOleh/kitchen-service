@@ -16,7 +16,8 @@ from .views import (
     DishCooksUpdateView,
     CookCreateView,
     CookDeleteView,
-    CookExperienceUpdateView
+    CookUpdateView,
+    CookChangePasswordView
 )
 
 urlpatterns = [
@@ -59,9 +60,12 @@ urlpatterns = [
     path("cooks/<int:pk>/delete/",
          CookDeleteView.as_view(),
          name="cook-delete"),
-    path("cooks/<int:pk>/license_update/",
-         CookExperienceUpdateView.as_view(),
+    path("cooks/<int:pk>/info_update/",
+         CookUpdateView.as_view(),
          name="cook-update"),
+    path("cooks/<int:pk>/password_update/",
+         CookChangePasswordView.as_view(),
+         name="cook-password-update"),
 ]
 
 app_name = "restaurant"
