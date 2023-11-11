@@ -1,9 +1,11 @@
 {% extends "base.html" %}
+{% load crispy_forms_filters %}
 
 {% block content %}
   <h1>Dish list
     <a href="{% url 'restaurant:dish-create' %}" class="btn btn-primary">Add new dish</a>
   </h1>
+  {% include "includes/search_form.html" %}
   {% if dish_list %}
     <ul>
       {% for dish in dish_list %}
