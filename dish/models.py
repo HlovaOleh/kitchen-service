@@ -1,5 +1,4 @@
 from django.conf import settings
-from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
@@ -9,13 +8,8 @@ class DishType(models.Model):
     def __str__(self) -> str:
         return self.name
 
-
-class Cook(AbstractUser):
-    years_of_experience = models.IntegerField(null=True)
-
     class Meta:
-        verbose_name = "Cook"
-        verbose_name_plural = "Cooks"
+        ordering = ['-name']
 
 
 class Dish(models.Model):
@@ -30,3 +24,4 @@ class Dish(models.Model):
     class Meta:
         verbose_name = "Dish"
         verbose_name_plural = "Dishes"
+        ordering = ['-name']

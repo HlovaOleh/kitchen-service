@@ -1,11 +1,12 @@
 from django.contrib.auth import get_user_model
 from django.test import TestCase, Client
 from django.urls import reverse
-from restaurant.models import DishType, Dish
 
-DISHTYPE_URL = reverse("restaurant:dish_type-list")
-DISH_URL = reverse("restaurant:dish-list")
-COOKS_URL = reverse("restaurant:cook-list")
+from dish.models import DishType, Dish
+
+DISHTYPE_URL = reverse("dish:dish_type-list")
+DISH_URL = reverse("dish:dish-list")
+COOKS_URL = reverse("cook:cook-list")
 
 
 class PublicDishTypeTest(TestCase):
@@ -38,7 +39,7 @@ class PrivateDishTypeTest(TestCase):
             list(res.context["dishtype_list"]),
             list(dishtype),
         )
-        self.assertTemplateUsed(res, "restaurant/dishtype_list.html")
+        self.assertTemplateUsed(res, "dish/dishtype_list.html")
 
     def test_search_dish_type_by_name(self):
         DishType.objects.create(name="Test")
@@ -89,14 +90,4 @@ class PrivateDishTest(TestCase):
             list(response.context["dish_list"]),
             list(dishes)
         )
-        self.assertTemplateUsed(response, "restaurant/dish_list.html")
-
-    def test_cook_search(self):
-        self.cook1 = get_user_model().objects.create(
-            username="Satan")
-        response = self.client.get(
-            reverse("restaurant:cook-list"), {"username": "Satan"}
-        )
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Satan")
-        self.assertNotContains(response, "aStan")
+        self.assertTemplateUsed(response, "dish/dish_list.html")

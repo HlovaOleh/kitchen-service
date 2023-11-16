@@ -5,13 +5,13 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-7 text-center mx-auto">
-          <h1>Delete dish type</h1>
+          <h1>Delete cook</h1>
 
-          <p>Are you sure you want to delete the dish type: {{ dishtype.name }}?</p>
+          <p>Are you sure you want to delete {{ cook.first_name }} {{ cook.last_name }} from database?</p>
           <form method="post">
             {% csrf_token %}
             <input type="submit" class="btn btn-danger" value="Delete">
-            <a href="{% url 'restaurant:dish-list' %}" class="btn btn-secondary">Cancel</a>
+            <a href="{% url 'dish:dish-list' %}" class="btn btn-secondary">Cancel</a>
           </form>
         </div>
       </div>

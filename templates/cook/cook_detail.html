@@ -41,7 +41,7 @@
               {% for dish in cook.dishes.all %}
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <h4 class="mb-0">
-                      <a href="{% url 'restaurant:dish-detail' pk=dish.id %}">{{ dish.name }}</a></h4>
+                      <a href="{% url 'dish:dish-detail' pk=dish.id %}">{{ dish.name }}</a></h4>
                 </div>
                 <div class="row mb-4">
                   <div class="col-auto">
@@ -58,10 +58,10 @@
               {% endfor %}
                 <div class="d-block">
                   <button type="button" class="btn btn-sm btn-outline-info text-nowrap mb-0">
-                    <a href="{% url 'restaurant:cook-update' pk=cook.id %}">Update Cook</a>
+                    <a href="{% url 'cook:cook-update' pk=cook.id %}">Update Cook</a>
                   </button>
                   <button type="button" class="btn btn-sm btn-outline-info text-nowrap mb-0">
-                    <a href="{% url 'restaurant:cook-delete' pk=cook.id %}">Delete Cook</a>
+                    <a href="{% url 'cook:cook-delete' pk=cook.id %}">Delete Cook</a>
                   </button>
                 </div>
             </div>

@@ -1,19 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from restaurant.models import DishType, Dish, Cook
-
-
-@admin.register(DishType)
-class DishTypeAdmin(admin.ModelAdmin):
-    pass
-
-
-@admin.register(Dish)
-class DishAdmin(admin.ModelAdmin):
-    list_display = ["name", "description", "price", "dish_type"]
-    list_filter = ["dish_type__name", ]
-    search_fields = ["name", ]
+from .models import Cook
 
 
 @admin.register(Cook)
