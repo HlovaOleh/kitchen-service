@@ -30,4 +30,4 @@ Do not share it publicly or expose it in your version control system.
 * DEBUG: setting controls whether your Django application is in debug mode. 
 In debug mode, detailed error pages are shown, making it easier to identify and fix issues during development. 
 However, it's crucial to set `DEBUG` to `False` in production to avoid exposing sensitive information.
-
+* DATABASE_URL: A PostgreSQL connection string, used to connect to the database.
