@@ -1,0 +1,29 @@
+{% extends 'layouts/base_sections.html' %}
+{% load static %}
+{% block content %}
+  <div class="page-header min-vh-75 relative">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-7 text-center mx-auto">
+          <h1>Delete dish</h1>
+
+          <p>Are you sure you want to delete the dish: {{ dish.name }}?</p>
+          <form method="post">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-danger" value="Delete">
+            <a href="{% url 'dish:dish-list' %}" class="btn btn-secondary">Cancel</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+{% block footer %}
+
+{% include 'includes/footer_background.html' %}
+
+{% endblock footer %}
+
+{% block javascripts %}
+
+{% endblock javascripts %}

@@ -1,0 +1,47 @@
+{% extends 'layouts/base_sections.html' %}
+{% load static %}
+
+{% block title %} Cooks {% endblock title %}
+
+{% block body %} class="bg-gray-100" {% endblock body %}
+
+{% block header %}
+
+{% include 'includes/navigation.html' %}
+
+{% endblock header %}
+
+{% block content %}
+  <section class="py-sm-7 py-5 position-relative">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 mx-auto">
+          <h2 class="mb-0">Dish type list</h2>
+          <div class="row">
+            <div class="col-lg-7 col-md-7 z-index-2 position-relative px-md-2 px-sm-5 mt-sm-0 mt-4">
+              {% if dishtype_list %}
+                {% include "includes/search_form.html" %}
+                {% for dishtype in dishtype_list %}
+                  <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h4 class="mb-0">{{ dishtype.name}}</h4>
+                    <div class="d-block">
+                      <button type="button" class="btn btn-sm btn-outline-info text-nowrap mb-0">
+                        <a href="{% url 'dish:dish_type-update' pk=dishtype.id %}">Update</a>
+                      </button>
+                      <button type="button" class="btn btn-sm btn-outline-info text-nowrap mb-0">
+                        <a href="{% url 'dish:dish_type-delete' pk=dishtype.id %}">Delete</a>
+                      </button>
+                    </div>
+                  </div>
+                  <br>
+                {% endfor %}
+                {% else %}
+                  <p class="text-lg mb-0">There are no dish types in restaurant</p>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

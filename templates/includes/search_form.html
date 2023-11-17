@@ -1,0 +1,10 @@
+{% load crispy_forms_filters %}
+<form action="" method="get" class="form-inline">
+    <div class="row text-center py-2 mt-3">
+    <div class="col-4 mx-auto">
+      <div class="input-group mb-4">
+        {{ search_form|crispy }}
+      </div>
+    </div>
+  </div>
+</form>
