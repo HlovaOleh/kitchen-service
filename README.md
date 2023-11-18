@@ -2,6 +2,9 @@
 
 Django project for managing dishes, dish types and cooks in restaurant
 
+## Check it out!
+[Restaurant project deployed to Render](https://restaurant-service-t3pf.onrender.com/)
+
 ## Installation
 
 Python3 must be already installed
