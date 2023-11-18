@@ -5,6 +5,12 @@ Django project for managing dishes, dish types and cooks in restaurant
 ## Check it out!
 [Restaurant project deployed to Render](https://restaurant-service-t3pf.onrender.com/)
 
+You can use this data to login:
+
+username: user
+
+password: user12345
+
 ## Installation
 
 Python3 must be already installed
