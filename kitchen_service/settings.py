@@ -33,6 +33,18 @@ DEBUG = os.environ.get("DJANGO_DEBUG", "") != "False"
 
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOST", "").split(",")
 
+CSRF_COOKIE_SECURE = os.environ["CSRF_COOKIE_SECURE"]
+
+SESSION_COOKIE_SECURE = os.environ["SESSION_COOKIE_SECURE"]
+
+SECURE_SSL_REDIRECT = os.environ["SECURE_SSL_REDIRECT"]
+
+SECURE_HSTS_SECONDS = os.environ["SECURE_HSTS_SECONDS"]
+
+# Another security settings
+SECURE_HSTS_INCLUDE_SUBDOMAINS = os.environ["SECURE_HSTS_INCLUDE_SUBDOMAINS"]
+SECURE_HSTS_PRELOAD = os.environ["SECURE_HSTS_PRELOAD"]
+SECURE_CONTENT_TYPE_NOSNIFF = os.environ["SECURE_CONTENT_TYPE_NOSNIFF"]
 
 # Application definition
 
